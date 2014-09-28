@@ -3,3 +3,4 @@ slurm*
 .snakemake.tmp*
 *.swp
 .snakemake/*
+cutadapt*

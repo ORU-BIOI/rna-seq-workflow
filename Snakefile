@@ -1,11 +1,9 @@
 import os
 
 # Knockout and Wilde type
-#KO_DS = "AAGACG_read1 AAGGGA_read1 GGACCC_read1".split()
-#WT_DS = "CCTTCA_read1 TGTTGC_read1 TTCAGC_read1".split()
-#SAMPLES = KO_DS + WT_DS
-
-SAMPLES = ["AAGGGA_read1_head_1G"]
+KO_DS = "AAGACG_read1 AAGGGA_read1 GGACCC_read1".split()
+WT_DS = "CCTTCA_read1 TGTTGC_read1 TTCAGC_read1".split()
+SAMPLES = KO_DS + WT_DS
 
 # paths to Transcriptome annotation, Whole Genome Sequence, WGS bowtie2 index
 ANNOTATION   = "../../pipeline-Hoefig-Aug2014/genome-mouse-NCBI/Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf"
