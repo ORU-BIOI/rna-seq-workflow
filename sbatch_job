@@ -1,0 +1,85 @@
+#!/bin/bash
+HELPDOC=$( cat <<EOF
+Executes the commmands given as arguments to the script. Circumvents writing a
+script every time you want to execute a simple command using sbatch. Some basic
+info like start of the job, jobid, jobname, elapsed time and the commands
+executed by the job are by default outputted to ~/jobs.log. Looking up a
+previously executed command can be done with grep on the jobs.log file. On
+uppmax one can look at resource usage of previous jobs by runnning
+finishedjobinfo.
+
+Usage:
+    sbatch [sbatch options] sbatch_job [sbatch_job options] <command_to_run>
+Options:
+    -h      This help documentation.
+    -l      Log filename (default: ~/jobs.log).
+    -n      Number of threads.
+
+NOTE: It is possible to use piping characters and semicolons as well, just
+surround the entire list of commands to be executed by single quotes.
+E.g.:
+sbatch -A b2010008 -J test -t 00:01:00 -p devel sbatch_job 'echo hi > hello.txt; mv hello.txt hi.txt'
+
+
+EOF
+)
+# Halt on error
+set -e
+
+LOGFILE="$HOME/jobs.log"
+
+# Parse options
+while getopts ":hn:l:" opt; do
+    case $opt in
+        h) 
+            echo "$HELPDOC"
+            exit 0
+            ;;
+        n)
+            export OMP_NUM_THREADS=$OPTARG
+            ;;
+        l)
+            LOGFILE=$OPTARG
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            echo "$HELPDOC"
+            exit 1
+            ;;  
+    esac
+done
+shift $(($OPTIND - 1))
+
+# Parse arguments
+if [ ${#@} -eq 0 ]
+then
+    echo "No arguments given" >&2
+    echo "$HELPDOC"
+    exit 1
+fi
+
+# Log start job
+{
+    echo "## ##"
+    echo "## START JOB $SLURM_JOB_ID - $SLURM_JOB_NAME"
+    echo "## `date`"
+    echo "## COMMAND: $@"
+    if [ -n "${OMP_NUM_THREADS+1}" ]
+    then
+        echo "## OMP_NUM_THREADS: $OMP_NUM_THREADS"
+    fi
+    echo "## LOGFILE: $LOGFILE"
+} | tee -a $LOGFILE
+
+# Execute job
+T="$(date +%s)"
+eval $@ # 2>&1
+T="$(($(date +%s)-T))"
+
+# Log finish job
+{
+    echo "## `date`"
+    printf "## Elapsed time: %02d-%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))" "$((T/60%60))" "$((T%60))"
+    echo "## FINISHED JOB $SLURM_JOB_ID - $SLURM_JOB_NAME"
+    echo "## ##"
+} | tee -a $LOGFILE

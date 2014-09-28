@@ -1,0 +1,5 @@
+*_head_1G*
+slurm*
+.snakemake.tmp*
+*.swp
+.snakemake/*
