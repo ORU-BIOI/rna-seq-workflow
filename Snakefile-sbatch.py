@@ -60,7 +60,8 @@ class SnakeJobSbatch(SnakeJob):
 
         run_locally = False
         print(self.rule, file=sys.stderr)
-        if self.rule == 'count_tophat_cutadapt':
+        if self.rule == 'htseq_tophat_cutadapt':
+            # Dummy rule, does not need any time
             attributes = {
                     'dep_str': self.dep_str,
                     'days': '0',
@@ -78,6 +79,7 @@ class SnakeJobSbatch(SnakeJob):
                     -J {job_name} {sbatch_job_path} \
                     '{script_name}'""".format(**attributes)
         elif self.rule == 'qc':
+            # c.a. 30M-40M reads c.a. 100bp long, longest job about 6 minutes
             attributes = {
                     'dep_str': self.dep_str,
                     'days': '0',
@@ -94,6 +96,7 @@ class SnakeJobSbatch(SnakeJob):
                             -J {job_name} {sbatch_job_path} \
                             '{script_name}'""".format(**attributes)
         elif self.rule == 'cutadapt':
+            # c.a. 30M-40M reads c.a. 100bp long, longest job about 15 minutes
             attributes = {
                     'dep_str': self.dep_str,
                     'days': '0',
@@ -126,6 +129,7 @@ class SnakeJobSbatch(SnakeJob):
                             -J {job_name} {sbatch_job_path} \
                             '{script_name}'""".format(**attributes)
         elif self.rule == 'tophat':
+            # c.a. 30M-40M reads c.a. 100bp long, longest job about 6 hours
             attributes = {
                     'dep_str': self.dep_str,
                     'days': '0',
@@ -142,11 +146,12 @@ class SnakeJobSbatch(SnakeJob):
                             -J {job_name} {sbatch_job_path} \
                             '{script_name}'""".format(**attributes)
         elif self.rule == 'count':
+            # c.a. 30M-40M reads c.a. 100bp long, longest job about 35 min
             attributes = {
                     'dep_str': self.dep_str,
                     'days': '0',
-                    'hours': '00',
-                    'minutes': '30',
+                    'hours': '01',
+                    'minutes': '00',
                     'p': 'core',
                     'N': '1',
                     'n': '1',
@@ -162,7 +167,7 @@ class SnakeJobSbatch(SnakeJob):
                     'dep_str': self.dep_str,
                     'days': '0',
                     'hours': '00',
-                    'minutes': '30',
+                    'minutes': '05',
                     'p': 'core',
                     'N': '1',
                     'n': '1',

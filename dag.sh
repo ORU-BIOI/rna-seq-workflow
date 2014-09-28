@@ -1,1 +1,1 @@
-snakemake count_tophat_cutadapt --dag | dot -Tpdf > TophatCutadapt.pdf
+snakemake htseq_tophat_cutadapt --dag | dot -Tpdf > TophatCutadapt.pdf
