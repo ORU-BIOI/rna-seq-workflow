@@ -18,7 +18,7 @@ To execute the pipeline on uppmax with the sbatch queueing system we can execute
 
 If we are not on a sbatch queue system we can exectue the pipeline without the previous scripts. then each rule runs when the previous rule finishes.
 
-To visualize the workflow, one can execute the [dag.sh]((https://bitbucket.org/binnisb/ngbi-rna-pipeline/src/master/dag.sh) script, which calls snakemake --dag with some parameres:
+To visualize the workflow, one can execute the [dag.sh](https://bitbucket.org/binnisb/ngbi-rna-pipeline/src/master/dag.sh) script, which calls snakemake --dag with some parameres:
 ```
 #!bash
 # To visualize the workflow executed when we run the rule htseq_tophat_cutadapt 
@@ -30,6 +30,5 @@ snakemake htseq_tophat_cutadapt
 
 # To run the pipeline on sbatch server, either run the Snakefile_sbatch.sh or
 # call snakemake in the following way:
-
+ snakemake -j 99 --debug --immediate-submit --cluster './Snakefile-sbatch.py {dependencies}' htseq_tophat_cutadapt
 ```
-
