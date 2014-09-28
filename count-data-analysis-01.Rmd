@@ -1,0 +1,89 @@
+---
+title: "Kai: count data analysis"
+author: "Dirk Repsilber"
+date: '2014-09-23'
+output: html_document
+---
+
+# read count data and get annotation
+
+```{r}
+
+library(biomaRt)
+
+counts.tab.01 <- read.table(file="cutadapt/tophat/htseq/map_count.txt",header=TRUE)
+
+
+
+tophat.ids <- as.character(counts.tab.01$id)
+
+rownames(counts.tab.01) <- tophat.ids
+
+```
+
+Seems that most well annotated features are already presented as gene symbols...
+
+# filter out low-count features
+
+```{r}
+groups <- c("KO","KO","KO","WT","WT","WT")
+discard <- apply(counts.tab.01[,2:7],1,function(x){
+  test <- x>=30
+  out <- TRUE
+  if(sum(test[groups=="WT"])==3) out <- FALSE
+  if(sum(test[groups=="KO"])==3) out <- FALSE
+  return(out)
+})
+
+counts.tab.02 <- counts.tab.01[!discard,]
+
+## removing last lines with summary information:
+counts.tab.03 <- counts.tab.02[1:(nrow(counts.tab.02)-3),]
+
+counts <- counts.tab.03[,-1]
+
+boxplot(as.data.frame(log10(counts)))
+```
+
+```{r}
+library(edgeR)
+d = DGEList(counts=counts, group=groups)
+d = calcNormFactors(d)
+d$samples
+
+plotMDS(d, labels=colnames(counts),col=c("darkgreen","blue")[factor(groups)])
+
+d = estimateCommonDisp(d)
+d = estimateTagwiseDisp(d)
+
+plotMeanVar(d, show.tagwise.vars=TRUE, NBline=TRUE)
+plotBCV(d)
+
+
+de = exactTest(d, pair=c("WT","KO"))
+
+raw.p <- de$table$PValue
+hist(raw.p,nclass = 50)
+
+write.csv2(topTags(de,n=42),file="topTags42.csv")
+
+# for ingenuity IPA:
+cat(rownames(topTags(de,n=42)),sep=", ")
+
+```
+
+compare to Kai:
+  1. Akr1c13
+  2. CD52
+  3. Tnf
+  4. Rmrp 
+... we find comparable hits.
+
+```{r example-to-understand-FC}
+
+norm <- d$samples$norm.factors
+counts.Usp18.norm <- counts["Usp18",] * norm
+log10(mean(as.numeric(counts.Usp18.norm[groups=="KO"])) - mean(as.numeric(counts.Usp18.norm[groups=="WT"])))
+log10(mean(as.numeric(counts.Usp18.norm[groups=="KO"]))) - log10(mean(as.numeric(counts.Usp18.norm[groups=="WT"])))
+topTags(de)
+```

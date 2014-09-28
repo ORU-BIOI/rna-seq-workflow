@@ -126,6 +126,6 @@ rule merge_count:
         countout = "{dir}/htseq/map_count.txt"
     shell:
         """
-        paste {input.bam} | awk '{{for (i=1; i<=NF; i++) if (i == 1 || i % 2 == 0) printf $i " "; print""}}' | cat > {output.countout}
+        paste {input.bam} | awk '{{for (i=1; i<=NF; i++) if (i == 1 || i % 2 == 0) printf $i "\t"; print""}}' | cat > {output.countout}
         """
 
