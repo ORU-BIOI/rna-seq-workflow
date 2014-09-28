@@ -5,3 +5,5 @@ slurm*
 .snakemake/*
 cutadapt*
 *fastqc*
+.RData
+.Rhistory
