@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="mm9" hasGeneTrack="true" hasSequenceTrack="true" locus="chr8:26894063-26916447" version="8">
+    <Resources>
+        <Resource path="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/GGACCC_read1/accepted_hits.bam"/>
+        <Resource path="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/AAGGGA_read1/accepted_hits.bam"/>
+        <Resource path="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/CCTTCA_read1/accepted_hits.bam"/>
+        <Resource path="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/AAGACG_read1/accepted_hits.bam"/>
+        <Resource path="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/TGTTGC_read1/accepted_hits.bam"/>
+        <Resource path="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/TTCAGC_read1/accepted_hits.bam"/>
+    </Resources>
+    <Panel height="495" name="Panel1411986487375" width="1901">
+        <Track altColor="0,0,178" autoScale="true" color="175,175,175" colorScale="ContinuousColorScale;0.0;54145.0;255,255,255;175,175,175" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/AAGACG_read1/accepted_hits.bam_coverage" name="AAGACG Coverage" showReference="false" snpThreshold="0.2" sortable="true" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="30.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/AAGACG_read1/accepted_hits.bam" name="AAGACG" showSpliceJunctions="false" sortable="true" visible="true">
+            <RenderOptions colorByTag="" colorOption="UNEXPECTED_PAIR" flagUnmappedPairs="false" groupByTag="" maxInsertSize="1000" minInsertSize="50" shadeBasesOption="QUALITY" shadeCenters="true" showAllBases="false" sortByTag=""/>
+        </Track>
+    </Panel>
+    <Panel height="355" name="Panel1411986527585" width="1901">
+        <Track altColor="0,0,178" autoScale="true" color="175,175,175" colorScale="ContinuousColorScale;0.0;25963.0;255,255,255;175,175,175" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/AAGGGA_read1/accepted_hits.bam_coverage" name="AAGGGA Coverage" showReference="false" snpThreshold="0.2" sortable="true" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="20.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/AAGGGA_read1/accepted_hits.bam" name="AAGGGA" showSpliceJunctions="false" sortable="true" visible="true">
+            <RenderOptions colorByTag="" colorOption="UNEXPECTED_PAIR" flagUnmappedPairs="false" groupByTag="" maxInsertSize="1000" minInsertSize="50" shadeBasesOption="QUALITY" shadeCenters="true" showAllBases="false" sortByTag=""/>
+        </Track>
+    </Panel>
+    <Panel height="341" name="Panel1411986570857" width="1901">
+        <Track altColor="0,0,178" autoScale="true" color="175,175,175" colorScale="ContinuousColorScale;0.0;31331.0;255,255,255;175,175,175" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/GGACCC_read1/accepted_hits.bam_coverage" name="GGACCC Coverage" showReference="false" snpThreshold="0.2" sortable="true" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="19.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/GGACCC_read1/accepted_hits.bam" name="GGACCC" showSpliceJunctions="false" sortable="true" visible="true">
+            <RenderOptions colorByTag="" colorOption="UNEXPECTED_PAIR" flagUnmappedPairs="false" groupByTag="" maxInsertSize="1000" minInsertSize="50" shadeBasesOption="QUALITY" shadeCenters="true" showAllBases="false" sortByTag=""/>
+        </Track>
+    </Panel>
+    <Panel height="1027" name="Panel1411986629260" width="1901">
+        <Track altColor="0,0,178" autoScale="true" color="175,175,175" colorScale="ContinuousColorScale;0.0;76786.0;255,255,255;175,175,175" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/CCTTCA_read1/accepted_hits.bam_coverage" name="CCTTCA Coverage" showReference="false" snpThreshold="0.2" sortable="true" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="68.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/CCTTCA_read1/accepted_hits.bam" name="CCTTCA" showSpliceJunctions="false" sortable="true" visible="true">
+            <RenderOptions colorByTag="" colorOption="UNEXPECTED_PAIR" flagUnmappedPairs="false" groupByTag="" maxInsertSize="1000" minInsertSize="50" shadeBasesOption="QUALITY" shadeCenters="true" showAllBases="false" sortByTag=""/>
+        </Track>
+    </Panel>
+    <Panel height="593" name="Panel1411986659605" width="1901">
+        <Track altColor="0,0,178" autoScale="true" color="175,175,175" colorScale="ContinuousColorScale;0.0;57450.0;255,255,255;175,175,175" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/TGTTGC_read1/accepted_hits.bam_coverage" name="TGTTGC Coverage" showReference="false" snpThreshold="0.2" sortable="true" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="37.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/TGTTGC_read1/accepted_hits.bam" name="TGTTGC" showSpliceJunctions="false" sortable="true" visible="true">
+            <RenderOptions colorByTag="" colorOption="UNEXPECTED_PAIR" flagUnmappedPairs="false" groupByTag="" maxInsertSize="1000" minInsertSize="50" shadeBasesOption="QUALITY" shadeCenters="true" showAllBases="false" sortByTag=""/>
+        </Track>
+    </Panel>
+    <Panel height="467" name="Panel1411986726957" width="1901">
+        <Track altColor="0,0,178" autoScale="true" color="175,175,175" colorScale="ContinuousColorScale;0.0;31811.0;255,255,255;175,175,175" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/TTCAGC_read1/accepted_hits.bam_coverage" name="TTCAGC Coverage" showReference="false" snpThreshold="0.2" sortable="true" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="28.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="10" id="/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/TTCAGC_read1/accepted_hits.bam" name="TTCAGC" showSpliceJunctions="false" sortable="true" visible="true">
+            <RenderOptions colorByTag="" colorOption="UNEXPECTED_PAIR" flagUnmappedPairs="false" groupByTag="" maxInsertSize="1000" minInsertSize="50" shadeBasesOption="QUALITY" shadeCenters="true" showAllBases="false" sortByTag=""/>
+        </Track>
+    </Panel>
+    <Panel height="176" name="FeaturePanel" width="1901">
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="Reference sequence" name="Reference sequence" sortable="false" visible="true"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" colorScale="ContinuousColorScale;0.0;226.0;255,255,255;0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" height="35" id="mm9_genes" name="Refseq genes" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="226.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+    </Panel>
+    <PanelLayout dividerFractions="0.007326007326007326,0.1282051282051282,0.2588522588522589,0.38461538461538464,0.5262515262515263,0.652014652014652,0.778998778998779"/>
+    <HiddenAttributes>
+        <Attribute name="NAME"/>
+        <Attribute name="DATA FILE"/>
+        <Attribute name="DATA TYPE"/>
+    </HiddenAttributes>
+</Session>
