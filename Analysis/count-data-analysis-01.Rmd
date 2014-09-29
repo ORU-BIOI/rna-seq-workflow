@@ -11,7 +11,7 @@ output: html_document
 
 library(biomaRt)
 
-counts.tab.01 <- read.table(file="cutadapt/tophat/htseq/map_count.txt",header=TRUE)
+counts.tab.01 <- read.table(file="../cutadapt/tophat/htseq/map_count.txt",header=TRUE)
 
 
 
