@@ -35,6 +35,7 @@ rule htseq_tophat_cutadapt:
     input: 
         expand("./{sample}_fastqc.html",sample = SAMPLES),
         expand("cutadapt/{sample}_fastqc.html",sample = SAMPLES),
+        expand("cutadapt/tophat/{sample}/accepted_hits.bam.bai",sample = SAMPLES),
         "cutadapt/tophat/htseq/map_count.txt"
 
 rule qc:
@@ -100,6 +101,16 @@ rule tophat:
         outdir = os.path.dirname(output.topout)
         mkdir(outdir)
         shell("""{params.py2} {params.path} -p {params.p} -o {outdir} --transcriptome-index={TRANS_INDEX} {WGS_BOWTIE2} {input.fastq}""")
+
+rule bam_index:
+    input:
+        bam = "{sample}.bam"
+    output:
+        bai = "{sample}.bam.bai"
+    shell:
+        """
+        samtools index {input.bam}
+        """
 
 rule count:
     input:    
