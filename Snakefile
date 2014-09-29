@@ -19,7 +19,7 @@ WGS_BOWTIE2  = "../../pipeline-Hoefig-Aug2014/genome-mouse-NCBI/Mus_musculus/NCB
 # it is nice to create the index just ones.
 TRANS_INDEX  = "../transcriptome-index/mus_known"
 # Python2 path
-PY2 = "/pica/h1/brynjar/miniconda/envs/sci2/bin/python2.7"
+PY2 = os.environ.get("PY2","/proj/b2014206/miniconda/envs/sci2/bin/python2.7")
 
 def mkdir(path_to_dir):
     """Create a directory if it does not exist, otherwise do nothing"""
