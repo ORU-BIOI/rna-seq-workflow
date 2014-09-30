@@ -1,0 +1,11 @@
+output_file	date	rule	version	status	plan
+cutadapt/tophat/htseq/map_count.txt	Sun Sep 28 22:14:24 2014	merge_count	-	ok	update pending
+cutadapt/tophat/AAGGGA_read1_head_1G/accepted_hits.bam.bai	-	-	-	missing	update pending
+cutadapt/AAGGGA_read1_head_1G_fastqc.html	-	qc	-	missing	update pending
+cutadapt/AAGGGA_read1_head_1G_fastqc.html	-	qc	-	missing	update pending
+./AAGGGA_read1_head_1G_fastqc.html	Sat Sep 27 16:48:04 2014	qc	-	ok	no update
+./AAGGGA_read1_head_1G_fastqc.html	Sat Sep 27 16:48:04 2014	qc	-	ok	no update
+cutadapt/tophat/htseq/map_count_AAGGGA_read1_head_1G.txt	-	count	-	missing	update pending
+cutadapt/tophat/AAGGGA_read1_head_1G/accepted_hits.bam	-	tophat	-	missing	update pending
+cutadapt/AAGGGA_read1_head_1G.fastq	-	cutadapt	-	missing	update pending
+../transcriptome-index/mus_known.gff	Sat Sep 27 16:48:03 2014	tophat_index	-	params changed	no update
