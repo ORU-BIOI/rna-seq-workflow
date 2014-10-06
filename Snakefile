@@ -36,7 +36,24 @@ rule htseq_tophat_cutadapt:
         expand("./{sample}_fastqc.html",sample = SAMPLES),
         expand("cutadapt/{sample}_fastqc.html",sample = SAMPLES),
         expand("cutadapt/tophat/{sample}/accepted_hits.bam.bai",sample = SAMPLES),
+        expand("cutadapt/tophat/{sample}/accepted_hits.XS.bam.bai",sample = SAMPLES),
+        expand("cutadapt/tophat/{sample}/accepted_hits.no_XS.bam.bai",sample = SAMPLES),
+
         "cutadapt/tophat/htseq/map_count.txt"
+
+# Rule to do qc of original reads, qc of the cutadapt reads, and
+# to generate merged counts of reads mapping to annotated transcripts.
+# It trims the reads with cutadapt, runs tophat with annotation to map
+# reads to transcripts onlly and uses htseq to generate counts of reads to
+# transcripts.
+rule htseq_tophat_transcriptome_only_cutadapt:
+    input: 
+        expand("./{sample}_fastqc.html",sample = SAMPLES),
+        expand("cutadapt/{sample}_fastqc.html",sample = SAMPLES),
+        expand("cutadapt/tophat_transcriptome_only/{sample}/accepted_hits.bam.bai",sample = SAMPLES),
+        expand("cutadapt/tophat_transcriptome_only/{sample}/accepted_hits.XS.bam.bai",sample = SAMPLES),
+        expand("cutadapt/tophat_transcriptome_only/{sample}/accepted_hits.no_XS.bam.bai",sample = SAMPLES),
+        "cutadapt/tophat_transcriptome_only/htseq/map_count.txt"
 
 rule qc:
     input: 
@@ -102,6 +119,24 @@ rule tophat:
         mkdir(outdir)
         shell("""{params.py2} {params.path} -p {params.p} -o {outdir} --transcriptome-index={TRANS_INDEX} {WGS_BOWTIE2} {input.fastq}""")
 
+rule tophat_to:
+    input:
+        WGS_BOWTIE2+".1.bt2", 
+        fastq = "{dir}/{sample}.fastq", 
+        ann   = ANNOTATION, 
+        ti    = TRANS_INDEX+".gff"
+    output:
+        topout = "{dir}/tophat_transcriptome_only/{sample}/accepted_hits.bam"
+    params:
+        py2     = PY2,
+        modules = "module load bioinfo-tools bowtie2/2.2.3 samtools tophat/2.0.12",
+        path    = "/sw/apps/bioinfo/tophat/2.0.12/milou/bin/tophat",
+        p       = "16"
+    run:
+        outdir = os.path.dirname(output.topout)
+        mkdir(outdir)
+        shell("""{params.py2} {params.path} -p {params.p} -o {outdir} --transcriptome-index={TRANS_INDEX} -T {WGS_BOWTIE2} {input.fastq}""")
+
 rule bam_index:
     input:
         bam = "{sample}.bam"
@@ -110,6 +145,26 @@ rule bam_index:
     shell:
         """
         samtools index {input.bam}
+        """
+
+rule bam_XS_index:
+    input:
+        bam = "{sample}.bam"
+    output:
+        bam = "{sample}.XS.bam"
+    shell:
+        """
+        samtools view -h {input.bam} | grep -e "^@" -e "XS:A" | samtools view -bS -o {output.bam} -
+        """
+
+rule bam_no_XS_index:
+    input:
+        bam = "{sample}.bam"
+    output:
+        bam = "{sample}.no_XS.bam"
+    shell:
+        """
+        samtools view -h {input.bam} | grep -ve "XS:A" | samtools view -bS -o {output.bam} -
         """
 
 rule count:
