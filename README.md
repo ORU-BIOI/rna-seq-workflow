@@ -12,8 +12,18 @@ source activate sci3
 Then we also load the required modules on uppmax (make sure these are installed otherwise):
 ```
 #!bash
-module load bioinfo-tools FastQC/0.11.2 samtools/0.1.19 bowtie2/2.2.3 tophat/2.0.12
+module load bioinfo-tools FastQC/0.11.2 samtools/0.1.19 bowtie2/2.2.3 tophat/2.0.12 picard/1.118
 ```
+The pipeline is defined in [Snakefile](https://bitbucket.org/binnisb/ngbi-rna-pipeline/src/master/Snakefile). The first rule is run by default or one can specify a rule to be run:
+
+```
+#!bash
+snakemake      # Runs the first rule specified in the Snakefile
+snakemake rnaseqc_tophat_cutadapt  # Runs the rnaseqc_tophat_cutadapt rule
+
+snakemake -n   # Shows what rules will be run to create output
+```
+
 To execute the pipeline on uppmax with the sbatch queueing system we can execute the [Snakefile-sbatch.sh](https://bitbucket.org/binnisb/ngbi-rna-pipeline/src/master/Snakefile-sbatch.sh) which in turn executes the python script [Snakefile-sbatch.py](https://bitbucket.org/binnisb/ngbi-rna-pipeline/src/master/Snakefile-sbatch.py) with sensible parameters. This submits all unfinished jobs to the sbatch queue with dependencies, so jobs that require the output from another job(s) as input do not start until all the inputs are ready.
 
 If we are not on a sbatch queue system we can exectue the pipeline without the previous scripts. then each rule runs when the previous rule finishes.

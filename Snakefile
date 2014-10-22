@@ -34,7 +34,7 @@ def mkdir(path_to_dir):
 # It trims the reads with cutadapt, runs tophat with annotation to map
 # reads to transcripts and uses htseq to generate counts of reads to
 # transcripts.
-rule rna_seqc_tophat_cutadapt:
+rule rnaseqc_tophat_cutadapt:
     input: 
         expand("./{sample}_fastqc.html",sample = SAMPLES),
         expand("cutadapt/{sample}_fastqc.html",sample = SAMPLES),

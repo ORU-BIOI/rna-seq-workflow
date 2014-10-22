@@ -96,7 +96,7 @@ class SnakeJobSbatch(SnakeJob):
             sbatch_cmd = """sbatch {dep_str} -A {proj_name} -p {p} -N {N} -n {n} -t {hours}:{minutes}:00 \
                     -J {job_name} {sbatch_job_path} \
                     '{script_name}'""".format(**attributes)
-        elif self.rule == 'rna_seqc_tophat_cutadapt':
+        elif self.rule == 'rnaseqc_tophat_cutadapt':
             # Dummy rule, does not need any time
             attributes = {
                     'dep_str': self.dep_str,
