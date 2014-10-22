@@ -8,20 +8,33 @@ output: html_document
 # read count data and get annotation
 
 ```{r}
-
+setwd("~/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/Analysis")
 library(biomaRt)
 
 counts.tab.01 <- read.table(file="../cutadapt/tophat/htseq/map_count.txt",header=TRUE)
+counts_exons.tab.01 <- read.table(file="../cutadapt/tophat_transcriptome_only/htseq/map_count.txt",header=TRUE)
 
 
 
 tophat.ids <- as.character(counts.tab.01$id)
 
 rownames(counts.tab.01) <- tophat.ids
-
+rownames(counts_exons.tab.01) <- tophat.ids
 ```
 
 Seems that most well annotated features are already presented as gene symbols...
+
+# distributions of exon vs intron mapping reads proportions
+
+```{r distribution-of-exon-and-intron-reads}
+non_transcriptome <- counts.tab.01[,2:7] - counts_exons.tab.01[,2:7]
+
+mean.all.reads <- apply(counts.tab.01[,2:7],1,mean)
+mean.exon.reads <- apply(counts_exons.tab.01[,2:7],1,mean)
+prop.exon.mapping.reads <- mean.exon.reads / mean.all.reads
+hist(prop.exon.mapping.reads)
+
+```
 
 # filter out low-count features
 

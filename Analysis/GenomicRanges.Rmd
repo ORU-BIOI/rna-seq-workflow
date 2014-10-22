@@ -1,0 +1,14 @@
+---
+title: "GenomicRanges"
+author: "Brynjar"
+date: "10/09/2014"
+output: html_document
+---
+Test out Genomic Ranges bioconductor package.
+
+```{r }
+setwd("~/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/Analysis")
+
+
+
+```

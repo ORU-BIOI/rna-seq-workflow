@@ -96,6 +96,24 @@ class SnakeJobSbatch(SnakeJob):
             sbatch_cmd = """sbatch {dep_str} -A {proj_name} -p {p} -N {N} -n {n} -t {hours}:{minutes}:00 \
                     -J {job_name} {sbatch_job_path} \
                     '{script_name}'""".format(**attributes)
+        elif self.rule == 'rna_seqc_tophat_cutadapt':
+            # Dummy rule, does not need any time
+            attributes = {
+                    'dep_str': self.dep_str,
+                    'days': '0',
+                    'hours': '00',
+                    'minutes': '05',
+                    'p': 'core',
+                    'N': '1',
+                    'n': '1',
+                    'job_name': "snakemake_{0}".format(self.rule),
+                    'sbatch_job_path': self.sbatch_job_path,
+                    'script_name': self.scriptname,
+                    'proj_name': self.proj_name}
+
+            sbatch_cmd = """sbatch {dep_str} -A {proj_name} -p {p} -N {N} -n {n} -t {hours}:{minutes}:00 \
+                    -J {job_name} {sbatch_job_path} \
+                    '{script_name}'""".format(**attributes)
         elif self.rule == 'qc':
             # c.a. 30M-40M reads c.a. 100bp long, longest job about 6 minutes
             attributes = {
@@ -261,6 +279,54 @@ class SnakeJobSbatch(SnakeJob):
             sbatch_cmd = """sbatch {dep_str} -A {proj_name} -p {p} -N {N} -n {n} -t {days}-{hours}:{minutes}:00 \
                             -J {job_name} {sbatch_job_path} \
                             '{script_name}'""".format(**attributes)
+        elif self.rule == 'read_group':
+            attributes = {
+                    'dep_str': self.dep_str,
+                    'days': '0',
+                    'hours': '01',
+                    'minutes': '00',
+                    'p': 'core',
+                    'N': '1',
+                    'n': '1',
+                    'job_name': "snakemake_{0}".format(self.rule),
+                    'sbatch_job_path': self.sbatch_job_path,
+                    'script_name': self.scriptname,
+                    'proj_name': self.proj_name}
+            sbatch_cmd = """sbatch {dep_str} -A {proj_name} -p {p} -N {N} -n {n} -t {days}-{hours}:{minutes}:00 \
+                            -J {job_name} {sbatch_job_path} \
+                            '{script_name}'""".format(**attributes)
+        elif self.rule == 'reorder':
+            attributes = {
+                    'dep_str': self.dep_str,
+                    'days': '0',
+                    'hours': '01',
+                    'minutes': '00',
+                    'p': 'core',
+                    'N': '1',
+                    'n': '1',
+                    'job_name': "snakemake_{0}".format(self.rule),
+                    'sbatch_job_path': self.sbatch_job_path,
+                    'script_name': self.scriptname,
+                    'proj_name': self.proj_name}
+            sbatch_cmd = """sbatch {dep_str} -A {proj_name} -p {p} -N {N} -n {n} -t {days}-{hours}:{minutes}:00 \
+                            -J {job_name} {sbatch_job_path} \
+                            '{script_name}'""".format(**attributes)
+        elif self.rule == 'rnaseqc':
+            attributes = {
+                    'dep_str': self.dep_str,
+                    'days': '0',
+                    'hours': '01',
+                    'minutes': '00',
+                    'p': 'core',
+                    'N': '1',
+                    'n': '1',
+                    'job_name': "snakemake_{0}".format(self.rule),
+                    'sbatch_job_path': self.sbatch_job_path,
+                    'script_name': self.scriptname,
+                    'proj_name': self.proj_name}
+            sbatch_cmd = """sbatch {dep_str} -A {proj_name} -p {p} -N {N} -n {n} -t {days}-{hours}:{minutes}:00 \
+                            -J {job_name} {sbatch_job_path} \
+                            '{script_name}'""".format(**attributes)                                                        
         else:
             raise UndefinedJobRule('Undefined resource usage %s' % (self.rule))
             return 2

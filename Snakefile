@@ -20,11 +20,26 @@ WGS_BOWTIE2  = "../../pipeline-Hoefig-Aug2014/genome-mouse-NCBI/Mus_musculus/NCB
 TRANS_INDEX  = "../transcriptome-index/mus_known"
 # Python2 path
 PY2 = os.environ.get("PY2","/proj/b2014206/miniconda/envs/sci2/bin/python2.7")
+# Other tools
+PICARD = os.environ.get("PICARD","/sw/apps/bioinfo/picard/1.118/milou")
+RNASEQC = os.environ.get("RNASEQC","/proj/b2014206/opt/RNA-SeQC_v1.1.8.jar")
 
 def mkdir(path_to_dir):
     """Create a directory if it does not exist, otherwise do nothing"""
     if not os.path.isdir(path_to_dir):
         os.makedirs(path_to_dir)
+
+# Rule to do qc of original reads, qc of the cutadapt reads, and
+# to generate merged counts of reads mapping to annotated transcripts.
+# It trims the reads with cutadapt, runs tophat with annotation to map
+# reads to transcripts and uses htseq to generate counts of reads to
+# transcripts.
+rule rna_seqc_tophat_cutadapt:
+    input: 
+        expand("./{sample}_fastqc.html",sample = SAMPLES),
+        expand("cutadapt/{sample}_fastqc.html",sample = SAMPLES),
+        expand("cutadapt/tophat/{sample}/accepted_hits_rg_reordered.bam.bai",sample = SAMPLES),
+        "cutadapt/tophat/rnaseqc"
 
 # Rule to do qc of original reads, qc of the cutadapt reads, and
 # to generate merged counts of reads mapping to annotated transcripts.
@@ -38,7 +53,6 @@ rule htseq_tophat_cutadapt:
         expand("cutadapt/tophat/{sample}/accepted_hits.bam.bai",sample = SAMPLES),
         expand("cutadapt/tophat/{sample}/accepted_hits.XS.bam.bai",sample = SAMPLES),
         expand("cutadapt/tophat/{sample}/accepted_hits.no_XS.bam.bai",sample = SAMPLES),
-
         "cutadapt/tophat/htseq/map_count.txt"
 
 # Rule to do qc of original reads, qc of the cutadapt reads, and
@@ -194,4 +208,55 @@ rule merge_count:
         """
         paste {input.bam} | awk '{{for (i=1; i<=NF; i++) if (i == 1 || i % 2 == 0) printf $i "\t"; print""}}' | cat > {output.countout}
         """
+
+rule read_group:
+    input:    
+        bam = "{dir}/{sample}/accepted_hits.bam",
+    output:
+        bamout = "{dir}/{sample}/accepted_hits_rg.bam"
+    params:
+        picard  = PICARD,
+        modules = "module load bioinfo-tools samtools picard/1.118",
+    shell:
+        """
+        java -jar {params.picard}/AddOrReplaceReadGroups.jar I={input.bam} O={output.bamout} LB=lb PL=illumina PU=pu SM={wildcards.sample}
+        """
+
+rule reorder:
+    input:    
+        bam = "{dir}/{sample}/accepted_hits_rg.bam",
+    output:
+        bamout = "{dir}/{sample}/accepted_hits_rg_reordered.bam"
+    params:
+        picard  = PICARD,
+        wgs     = WGS,
+        modules = "module load bioinfo-tools samtools picard/1.118",
+    shell:
+        """
+        java -jar {params.picard}/ReorderSam.jar I={input.bam} O={output.bamout} R={params.wgs}
+        """
+
+rule rnaseqc:
+    input:    
+        bam = expand("{{dir}}/{sample}/accepted_hits_rg_reordered.bam",sample=SAMPLES),
+    output:
+        rnaseqc = "{dir}/rnaseqc",
+        info = "{dir}/rnaseqc/samples.info.txt"
+    params:
+        rnaseqc = RNASEQC,
+        wgs     = WGS,
+        gtf     = ANNOTATION,
+        modules = "module load bioinfo-tools samtools picard/1.118",
+    run:
+        mkdir(output.rnaseqc)
+        samples = []
+        for i in input.bam:
+            s = i.split("/")
+            samples.append("\t".join([s[-2],i,"No description"]))
+        with open(output.info,"w") as fh:
+            fh.write("\n".join(i))
+
+        shell("""
+              java -jar {params.rnaseqc} -o {output.rnaseqc} -r {params.wgs} -s {output.info} -singleEnd -t {params.gtf}
+              """)
 
