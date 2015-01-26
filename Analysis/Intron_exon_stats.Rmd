@@ -1,0 +1,37 @@
+---
+title: "Intron_Exon_stats"
+author: "Brynjar"
+date: "11/05/2014"
+output: html_document
+---
+Using RNA-SeQC we get counts of reads mapping to introns, exons and between genes
+
+```{r}
+path = "/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc"
+
+samples = c("AAGACG_read1","AAGGGA_read1","CCTTCA_read1","GGACCC_read1","TGTTGC_read1","TTCAGC_read1")
+
+files = c(".metrics.tmp.txt.intronReport.txt",".metrics.tmp.txt.intronReport.txt_exonOnly.txt",".metrics.tmp.txt.intronReport.txt_intronOnly.txt")
+```
+I could not find out how to combine all samples with files to generate full paths for the files so I used Python to generate it for me. It outputs this list:
+```{r}
+full_files = c('/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/AAGACG_read1/AAGACG_read1.metrics.tmp.txt.intronReport.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/AAGACG_read1/AAGACG_read1.metrics.tmp.txt.intronReport.txt_exonOnly.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/AAGACG_read1/AAGACG_read1.metrics.tmp.txt.intronReport.txt_intronOnly.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/AAGGGA_read1/AAGGGA_read1.metrics.tmp.txt.intronReport.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/AAGGGA_read1/AAGGGA_read1.metrics.tmp.txt.intronReport.txt_exonOnly.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/AAGGGA_read1/AAGGGA_read1.metrics.tmp.txt.intronReport.txt_intronOnly.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/CCTTCA_read1/CCTTCA_read1.metrics.tmp.txt.intronReport.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/CCTTCA_read1/CCTTCA_read1.metrics.tmp.txt.intronReport.txt_exonOnly.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/CCTTCA_read1/CCTTCA_read1.metrics.tmp.txt.intronReport.txt_intronOnly.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/GGACCC_read1/GGACCC_read1.metrics.tmp.txt.intronReport.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/GGACCC_read1/GGACCC_read1.metrics.tmp.txt.intronReport.txt_exonOnly.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/GGACCC_read1/GGACCC_read1.metrics.tmp.txt.intronReport.txt_intronOnly.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/TGTTGC_read1/TGTTGC_read1.metrics.tmp.txt.intronReport.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/TGTTGC_read1/TGTTGC_read1.metrics.tmp.txt.intronReport.txt_exonOnly.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/TGTTGC_read1/TGTTGC_read1.metrics.tmp.txt.intronReport.txt_intronOnly.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/TTCAGC_read1/TTCAGC_read1.metrics.tmp.txt.intronReport.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/TTCAGC_read1/TTCAGC_read1.metrics.tmp.txt.intronReport.txt_exonOnly.txt',
+ '/home/binni/Programming/milou/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/pipeline_snakemake/cutadapt/tophat/rnaseqc/TTCAGC_read1/TTCAGC_read1.metrics.tmp.txt.intronReport.txt_intronOnly.txt')
+```
+

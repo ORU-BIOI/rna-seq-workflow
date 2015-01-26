@@ -249,12 +249,12 @@ rule rnaseqc:
         modules = "module load bioinfo-tools samtools picard/1.118",
     run:
         mkdir(output.rnaseqc)
-        samples = []
+        samples = ["\t".join(["ID","Input File","Description"])]
         for i in input.bam:
             s = i.split("/")
             samples.append("\t".join([s[-2],i,"No description"]))
         with open(output.info,"w") as fh:
-            fh.write("\n".join(i))
+            fh.write("\n".join(samples))
 
         shell("""
               java -jar {params.rnaseqc} -o {output.rnaseqc} -r {params.wgs} -s {output.info} -singleEnd -t {params.gtf}
