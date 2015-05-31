@@ -1,9 +1,8 @@
+jobs.log
 *_head_1G*
-slurm*
 .snakemake.tmp*
 *.swp
 .snakemake/*
-cutadapt*
-*fastqc*
 .RData
 .Rhistory
+*slurm.out
