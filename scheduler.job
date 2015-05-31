@@ -26,7 +26,7 @@ EOF
 # Halt on error
 set -e
 
-LOGFILE="$HOME/jobs.log"
+LOGFILE="./jobs.log"
 
 # Parse options
 while getopts ":hn:l:" opt; do

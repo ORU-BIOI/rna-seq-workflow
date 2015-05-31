@@ -42,3 +42,7 @@ snakemake htseq_tophat_cutadapt
 # call snakemake in the following way:
  snakemake -j 99 --debug --immediate-submit --cluster './Snakefile-sbatch.py {dependencies}' htseq_tophat_cutadapt
 ```
+
+# Additional analysis using R and ipython
+
+... are found in folder Analysis

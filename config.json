@@ -1,0 +1,25 @@
+{
+    "samplegroups": {
+            "1": "reads/AAGACG_read1_small",
+            "2": "reads/CCTTCA_read1_small"
+    },
+
+    "annotation": "/proj/b2014206/nobackup/Hoefig-mouse-transcriptome/pipeline-Hoefig-Aug2014/genome-mouse-NCBI/Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf",
+
+    "wgs": "/proj/b2014206/nobackup/Hoefig-mouse-transcriptome/pipeline-Hoefig-Aug2014/genome-mouse-NCBI/Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa",
+
+    "wgs_bowtie2": "/proj/b2014206/nobackup/Hoefig-mouse-transcriptome/pipeline-Hoefig-Aug2014/genome-mouse-NCBI/Mus_musculus/NCBI/build37.2/Sequence/Bowtie2Index/genome",
+
+    "trans_index": "/proj/b2014206/nobackup/Hoefig-mouse-transcriptome/Hoefig_demultiplex/transcriptome-index/mus_known",
+
+    "py2": "/proj/b2014206/miniconda/envs/sci2/bin/",
+
+    "picard": "/sw/apps/bioinfo/picard/1.118/milou",
+
+    "rnaseqc": "/proj/b2014206/opt/RNA-SeQC_v1.1.8.jar",
+
+    "qc": {
+    	"threads": "16"
+    }
+
+}
